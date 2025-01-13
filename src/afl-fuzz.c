@@ -2543,11 +2543,11 @@ int main(int argc, char **argv_orig, char **envp) {
 
     }
 
+    afl->fox_map_size = afl->fsrv.map_size;
     u32 new_map_size = afl_fsrv_get_mapsize(
         &afl->fsrv, afl->argv, &afl->stop_soon, afl->afl_env.afl_debug_child);
 
     // TODO: better constrain total_border_edge_cnt
-    afl->fox_map_size = new_map_size + sizeof(u64);
     load_max_edge_cnts(afl);
     afl->fsrv.cmp_type = (u8 *) ck_alloc(sizeof(u8) * afl->fox_map_size);
     afl->fsrv.border_edge_parent_first_id = (u32 *) ck_alloc(sizeof(u32) * afl->fox_map_size);
